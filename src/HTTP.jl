@@ -6,7 +6,7 @@ export startwrite, startread, closewrite, closeread
 using MbedTLS
 import MbedTLS: SSLContext
 
-const DEBUG_LEVEL = 0
+const DEBUG_LEVEL = 1
 
 Base.@deprecate escape escapeuri
 Base.@deprecate URL URI
@@ -500,7 +500,7 @@ relationship with [`HTTP.Response`](@ref), [`HTTP.Parsers`](@ref),
 ││   │ request(StreamLayer,               ::IO,  ::Request, body) │           │
 ││   └──────────────┬───────────────────┬─────────────────────────┘         │ │
 │└──────────────────┼────────║──────────┼───────────────║─────────────────────┘
-│                   │        ║          │               ║                   │  
+│                   │        ║          │               ║                   │
 │┌──────────────────▼───────────────┐   │  ┌──────────────────────────────────┐
 ││ HTTP.Request                     │   │  │ HTTP.Response                  │ │
 ││                                  │   │  │                                  │
@@ -524,7 +524,7 @@ relationship with [`HTTP.Response`](@ref), [`HTTP.Parsers`](@ref),
 ││ writestartline(::IO, ::Request)  │ │  ║ │ parse_status_line(bytes, ::Req') │
 ││ writeheaders(::IO, ::Request)    │ │  ║ │ parse_header_field(bytes, ::Req')│
 │└──────────────────────────────────┘ │  ║ └──────────────────────────────────┘
-│                            ║        │  ║                                     
+│                            ║        │  ║
 │┌───────────────────────────║────────┼──║────────────────────────────────────┐
 └▶ HTTP.ConnectionPool       ║        │  ║                                    │
  │                     ┌──────────────▼────────┐ ┌───────────────────────┐    │
@@ -544,7 +544,7 @@ relationship with [`HTTP.Response`](@ref), [`HTTP.Parsers`](@ref),
  │                           ║           ║       │ Base.TCPSocket <:IO   │    │
  │                           ║           ║       └───────────────────────┘    │
  └───────────────────────────║───────────║────────────────────────────────────┘
-                             ║           ║                                     
+                             ║           ║
  ┌───────────────────────────║───────────║──────────────┐  ┏━━━━━━━━━━━━━━━━━━┓
  │ HTTP Server               ▼                          │  ┃ data flow: ════▶ ┃
  │                        Request     Response          │  ┃ reference: ────▶ ┃
