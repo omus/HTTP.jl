@@ -622,6 +622,7 @@ function sslconnection(tcp::TCPSocket, host::AbstractString;
         sslconfig = global_sslconfig(require_ssl_verification)
     end
 
+    @debug 2 "SSL handshake $(sprint(Base.show_backtrace, stacktrace()))"
     io = SSLContext()
     setup!(io, sslconfig)
     associate!(io, tcp)
